@@ -6,7 +6,7 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 20:12:12 by jkovacev          #+#    #+#             */
-/*   Updated: 2025/05/08 20:03:37 by jkovacev         ###   ########.fr       */
+/*   Updated: 2025/05/08 20:50:47 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int perror_and_return(char *s, int n)
     return (n);
 }
 
-int fork_child(char *cmd, int input_fd, int output_fd, char *envVec[], int to_close)
+int fork_child(char *cmd, int input_fd, int output_fd, char *envp[], int to_close)
 {
     pid_t   pid;
-    char    *argVec[] = { NULL };
+    char    *args[] = { cmd, NULL };
 
     pid = fork();
     if (pid == -1)
@@ -35,18 +35,17 @@ int fork_child(char *cmd, int input_fd, int output_fd, char *envVec[], int to_cl
         close(input_fd);
         close(output_fd);
         close(to_close);
-        execve(cmd, argVec, envVec);
+        execve(cmd, args, envp);
         perror_and_return("Error: execve failed", 0);
     }
     return (1);
 }
 
-int main(int argc, char *argv[])
+int main(int argc, char *argv[], char *envp[])
 {
     int     fd[2];
     int     input_fd;
     int     output_fd;
-    char    *envp[] = { NULL };
 
     if (argc != 5)
         perror_and_return("Error: Invalid number of arguments", 1);
