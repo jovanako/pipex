@@ -6,7 +6,7 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:59:52 by jkovacev          #+#    #+#             */
-/*   Updated: 2025/05/27 20:47:40 by jkovacev         ###   ########.fr       */
+/*   Updated: 2025/05/27 21:36:41 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	free_arr_of_strings(char **arr)
 
 void free_tcmd(t_cmd *execve_cmd)
 {
-	if (execve_cmd->args[0])
+	if (execve_cmd->args)
 		free_arr_of_strings(execve_cmd->args);
     free(execve_cmd);
 }
