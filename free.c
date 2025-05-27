@@ -6,7 +6,7 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:59:52 by jkovacev          #+#    #+#             */
-/*   Updated: 2025/05/27 21:36:41 by jkovacev         ###   ########.fr       */
+/*   Updated: 2025/05/27 21:48:23 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ int free_tcmd_and_return(t_cmd *execve_cmd)
 {
 	free_tcmd(execve_cmd);
     return (0);
+}
+
+int free_tcmd_and_exit(t_cmd *execve_cmd)
+{
+	free_tcmd(execve_cmd);
+    exit(1);
 }
 
 int	free_perror_and_return(t_cmd *execve_cmd, char *s)

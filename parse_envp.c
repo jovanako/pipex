@@ -6,7 +6,7 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 21:41:42 by jkovacev          #+#    #+#             */
-/*   Updated: 2025/05/27 21:41:14 by jkovacev         ###   ########.fr       */
+/*   Updated: 2025/05/27 22:02:14 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ static char  *find_cmd(t_cmd *execve_cmd, char **s)
 			free(full_cmd);
             return (cmd_path);
 		}
+		free(cmd_path);
         i++;
     }
 	free(full_cmd);
-	free(cmd_path);
     return ((void *)0);
 }
 static int     find_path_var(char *envp[])
