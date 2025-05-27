@@ -6,32 +6,41 @@
 #    By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/07 20:11:55 by jkovacev          #+#    #+#              #
-#    Updated: 2025/05/08 14:31:03 by jkovacev         ###   ########.fr        #
+#    Updated: 2025/05/26 14:01:49 by jkovacev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 
-CC = cc
+CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -g -Wall -Wextra -Werror
 
-SRCS = pipex.c
+SRCS = pipex.c \
+		ft_split.c \
+		ft_substr.c \
+		parse_cmd.c \
+		parse_envp.c \
+		str_manipulation.c \
+		free.c		
 
-OBJS = $(SRCS:.c=.o)
+OBJDIR = objects
+OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
 
-DEPS = pipex.h
+DEPS = pipex.h \
+		str_manipulation.h
 
 all: $(NAME)
 
 $(NAME) : $(OBJS)
 	$(CC) $(OBJS) -o $(NAME)
 
-%.o: %.c $(DEPS)
+$(OBJDIR)/%.o: %.c $(DEPS)
+	@mkdir -p $(OBJDIR)
 	$(CC) $(CFLAGS) -c -o $@ $<
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJDIR)
 
 fclean: clean
 	rm -f $(NAME)
