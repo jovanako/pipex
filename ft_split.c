@@ -6,7 +6,7 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 21:42:57 by jkovacev          #+#    #+#             */
-/*   Updated: 2025/05/26 14:32:02 by jkovacev         ###   ########.fr       */
+/*   Updated: 2025/05/27 20:27:41 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,9 @@ static char	*extract_word(char *s, char c,
 	char	*start;
 	char	*end;
 
-	start = (char *)s;
+	start = s;
 	while (*start && *start == c)
-	{
 		start++;
-	}
 	end = ft_strchr(start, c);
 	if (end == NULL)
 		end = start + ft_strlen(start);
@@ -63,7 +61,7 @@ static char	*extract_word(char *s, char c,
 
 static void	free_result(char **result)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	while (result[i])
@@ -78,7 +76,6 @@ char	**ft_split(char *s, char c)
 	int		i;
 	char	*current;
 
-	//fprintf(stderr, "ft_split call\n");
 	word_count = count_words(s, c);
 	result = (char **)malloc((word_count + 1) * sizeof(char *));
 	if (!result)
