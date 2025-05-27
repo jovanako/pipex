@@ -6,7 +6,7 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 20:12:12 by jkovacev          #+#    #+#             */
-/*   Updated: 2025/05/27 21:50:02 by jkovacev         ###   ########.fr       */
+/*   Updated: 2025/05/27 22:22:31 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int fork_pipe_left(char *cmd, int input_fd, int fd[], char *envp[])
         close(fd[0]);
         close(fd[1]);
         if (!parse_envp(envp, &execve_cmd))
-            free_tcmd_and_exit(execve_cmd);
+            free_tcmd_error_and_exit(execve_cmd);
         if (execve(execve_cmd->cmd, execve_cmd->args, envp) == -1)
 			return (free_perror_and_return(execve_cmd, "Error: execve failed"));
     }
@@ -68,7 +68,7 @@ static int fork_pipe_right(char *cmd, int output_fd, int fd[], char *envp[])
         close(fd[0]);
         close(fd[1]);
         if (!parse_envp(envp, &execve_cmd))
-            free_tcmd_and_exit(execve_cmd);
+            free_tcmd_error_and_exit(execve_cmd);
         if (execve(execve_cmd->cmd, execve_cmd->args, envp) == -1)
 			return (free_perror_and_return(execve_cmd, "Error: execve failed"));
     }
