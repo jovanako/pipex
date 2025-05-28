@@ -6,7 +6,7 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 20:12:21 by jkovacev          #+#    #+#             */
-/*   Updated: 2025/05/27 22:20:50 by jkovacev         ###   ########.fr       */
+/*   Updated: 2025/05/28 20:28:26 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct s_cmd
 }   t_cmd;
 
 t_cmd  *parse_input_cmd(t_cmd **execve_cmd, char *cmd);
-int     parse_envp(char *envp[], t_cmd **execve_cmd);
+int     parse_envp(char *envp[], t_cmd *execve_cmd);
 char	*ft_substr(char *s, int start, int len);
 void	free_arr_of_strings(char **arr);
 void	free_tcmd(t_cmd *execve_cmd);

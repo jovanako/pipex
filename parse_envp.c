@@ -6,7 +6,7 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 21:41:42 by jkovacev          #+#    #+#             */
-/*   Updated: 2025/05/27 22:02:14 by jkovacev         ###   ########.fr       */
+/*   Updated: 2025/05/28 21:55:18 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static char  *find_cmd(t_cmd *execve_cmd, char **s)
 	free(full_cmd);
     return ((void *)0);
 }
-static int     find_path_var(char *envp[])
+
+static char	*get_path(char *envp[], char **path_str, t_cmd *execve_cmd)
 {
     int i;
 
@@ -48,30 +49,55 @@ static int     find_path_var(char *envp[])
     {
         if (ft_strncmp(envp[i], "PATH", 4))
         {
-            return (i);
+    		*path_str = (char *) malloc ((ft_strlen(envp[i]) - 4) * sizeof(char));
+			if (!path_str)
+			{
+				free_tcmd(execve_cmd);
+				return (0);
+			}
+    		*path_str = copy(*path_str, envp[i], 5);
+			return (*path_str);            
         }
         i++;
     }
 	write (1, "Error\n", 6);
-    return (-1);
+    return (0);
 }
 
-int     parse_envp(char *envp[], t_cmd **execve_cmd)
+static int	is_script(char *s)
 {
-    int     path_i;
+	if (s[0] == '.' && s[1] == '/' && ft_strlen(s) > 2)
+		return (1);
+	return (0);
+}
+
+static int	is_full_path(t_cmd *execve_cmd)
+{
+	if (execve_cmd->cmd[0] == '/')
+	{
+        if (access(execve_cmd->cmd, F_OK) == 0)
+			return (1);
+		perror("No such file or directory");
+		return (free_tcmd_and_return(execve_cmd));
+	}
+	return (0);
+}
+
+int     parse_envp(char *envp[], t_cmd *execve_cmd)
+{
     char    *path_str;
     char    **split_path;
 
-    path_i = find_path_var(envp);
-    if (path_i < 0)
-        return (0);
-    path_str = (char *) malloc ((ft_strlen(envp[path_i]) - 4) * sizeof(char));
-    if (!path_str)
-        return (free_tcmd_and_return(*execve_cmd));
-    path_str = copy(path_str, envp[path_i], 5);
+	if (is_script(execve_cmd->cmd))
+		return (1);
+	if (is_full_path(execve_cmd))
+		return (1);
+	path_str = get_path(envp, &path_str, execve_cmd);
+	if (!path_str)
+		return (free_tcmd_and_return(execve_cmd));
     split_path = ft_split(path_str, ':');
-    (*execve_cmd)->cmd = find_cmd(*execve_cmd, split_path);
-    if (!((*execve_cmd)->cmd))
+    execve_cmd->cmd = find_cmd(execve_cmd, split_path);
+    if (!(execve_cmd->cmd))
     {
         free(path_str);
         free_arr_of_strings(split_path);

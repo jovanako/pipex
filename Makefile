@@ -6,15 +6,15 @@
 #    By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/04/07 20:11:55 by jkovacev          #+#    #+#              #
-#    Updated: 2025/05/26 14:01:49 by jkovacev         ###   ########.fr        #
+#    Updated: 2025/05/28 22:22:14 by jkovacev         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
 
-CC = gcc
+CC = cc
 
-CFLAGS = -g -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 SRCS = pipex.c \
 		ft_split.c \
