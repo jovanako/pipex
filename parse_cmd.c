@@ -6,7 +6,7 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 13:40:34 by jkovacev          #+#    #+#             */
-/*   Updated: 2025/05/28 22:19:58 by jkovacev         ###   ########.fr       */
+/*   Updated: 2025/05/29 10:40:17 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,9 @@ t_cmd  *parse_input_cmd(t_cmd **execve_cmd, char *cmd)
 {
     *execve_cmd = (t_cmd *) malloc (sizeof (t_cmd));
     if (!(*execve_cmd))
-        return (0);
+	{
+        return (0);		
+	}
 	if (!args_to_struct(&(*execve_cmd), cmd))
 		return (0);
     return (*execve_cmd);

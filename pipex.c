@@ -6,7 +6,7 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/07 20:12:12 by jkovacev          #+#    #+#             */
-/*   Updated: 2025/05/28 21:51:55 by jkovacev         ###   ########.fr       */
+/*   Updated: 2025/05/29 11:24:37 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int main(int argc, char *argv[], char *envp[])
     if (input_fd == -1)
         return (perror_and_return("Error: open failed"));
     fork_pipe_left(argv[2], input_fd, fd, envp);       
-    output_fd = open(argv[4], O_CREAT | O_WRONLY, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+    output_fd = open(argv[4], O_CREAT | O_WRONLY | O_TRUNC, S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
     if (output_fd == -1)
         return (perror_and_return("Error: open failed"));
     fork_pipe_right(argv[3], output_fd, fd, envp);
