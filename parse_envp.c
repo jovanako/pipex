@@ -6,7 +6,7 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 21:41:42 by jkovacev          #+#    #+#             */
-/*   Updated: 2025/05/28 21:55:18 by jkovacev         ###   ########.fr       */
+/*   Updated: 2025/05/31 18:38:51 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ static char	*get_path(char *envp[], char **path_str, t_cmd *execve_cmd)
         }
         i++;
     }
-	write (1, "Error\n", 6);
+	write (2, "Error\n", 6);
     return (0);
 }
 
@@ -77,7 +77,7 @@ static int	is_full_path(t_cmd *execve_cmd)
 	{
         if (access(execve_cmd->cmd, F_OK) == 0)
 			return (1);
-		perror("No such file or directory");
+		// perror("No such file or directory");
 		return (free_tcmd_and_return(execve_cmd));
 	}
 	return (0);

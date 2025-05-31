@@ -6,7 +6,7 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/24 19:59:52 by jkovacev          #+#    #+#             */
-/*   Updated: 2025/05/27 22:29:05 by jkovacev         ###   ########.fr       */
+/*   Updated: 2025/05/31 18:19:44 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int free_tcmd_and_return(t_cmd *execve_cmd)
 
 int free_tcmd_error_and_exit(t_cmd *execve_cmd)
 {
-	perror("Command not found");
+	perror("Error: Command not found");
 	free_tcmd(execve_cmd);
     exit(1);
 }

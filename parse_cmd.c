@@ -6,7 +6,7 @@
 /*   By: jkovacev <jkovacev@student.42berlin.de>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 13:40:34 by jkovacev          #+#    #+#             */
-/*   Updated: 2025/05/29 10:40:17 by jkovacev         ###   ########.fr       */
+/*   Updated: 2025/05/31 18:39:20 by jkovacev         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ static int  args_to_struct(t_cmd **execve_cmd, char *cmd)
 
 t_cmd  *parse_input_cmd(t_cmd **execve_cmd, char *cmd)
 {
+	if (ft_strlen(cmd) == 0)
+	{
+		write(2, "Error: Invalid command\n", 23);
+		return (0);
+	}
     *execve_cmd = (t_cmd *) malloc (sizeof (t_cmd));
     if (!(*execve_cmd))
 	{
